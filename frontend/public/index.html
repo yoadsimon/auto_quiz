@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#4F46E5" />
     <meta name="description" content="Hebrew Quiz PWA - Test your Hebrew knowledge offline" />
@@ -13,10 +13,10 @@
     <meta name="apple-mobile-web-app-title" content="חידון עברית" />
     
     <!-- Apple touch icons -->
-    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="apple-touch-icon" href="./logo192.png" />
     
     <!-- Manifest -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     
     <title>חידון עברית - Hebrew Quiz PWA</title>
     
@@ -33,7 +33,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('./sw.js')
             .then((registration) => {
               console.log('SW registered: ', registration);
             })

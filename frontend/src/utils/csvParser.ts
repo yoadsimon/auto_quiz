@@ -127,7 +127,7 @@ export const loadQuizData = async (): Promise<QuizQuestion[]> => {
   try {
     console.log('🔄 Starting to load quiz data from original source...');
     // Access via symbolic link to avoid duplication
-    const response = await fetch('/quiz_data.csv');
+    const response = await fetch('./quiz_data.csv');
     console.log('📡 Fetch response status:', response.status);
     
     if (!response.ok) {
