@@ -4,20 +4,58 @@
   width: 100%;
   max-width: 600px;
   animation: fadeIn 0.8s ease-out;
-  padding: 20px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
+  /* Fixed layout structure - no dynamic height changes */
+  height: 100vh;
+  overflow: hidden;
+  
+  /* Modern rounded container */
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  margin: 10px auto;
+  height: calc(100vh - 20px);
+  overflow-x: hidden;
 }
 
-/* Desktop adjustments */
+/* Desktop: Beautiful rounded design with plenty of space */
 @media (min-width: 769px) {
   .main-menu {
     min-height: auto;
     padding: 0;
+    
+    /* Restore beautiful container design for desktop */
+    margin: 10px auto;
+    height: calc(100vh - 20px);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    max-width: 600px; /* Contained width for desktop */
   }
+  
+  .browser-header-fixed {
+    border-radius: 24px 24px 0 0;
+    padding: 20px;
+  }
+  
+  .search-area-fixed {
+    padding: 20px;
+  }
+  
+  .scrollable-content {
+    border-radius: 0 0 24px 24px;
+    padding: 20px;
+  }
+  
+  .question-card {
+    padding: 20px; /* Full padding on desktop */
+    margin-bottom: 16px;
+    border-radius: 16px;
+  }
+  
+  /* Perfect pill shapes handled by universal rule */
 }
 
 @keyframes fadeIn {
@@ -204,30 +242,108 @@
   box-shadow: 0 6px 12px rgba(70, 23, 143, 0.3);
 }
 
+/* Fixed Header - Kahoot style with vibrant gradients */
+.browser-header-fixed {
+  flex: 0 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+}
+
+.browser-header-fixed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--accent-orange), var(--accent-pink), var(--primary-blue));
+  opacity: 0.1;
+  animation: float 10s ease-in-out infinite;
+}
+
 .browser-title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: var(--dark-purple);
+  color: white;
   margin: 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Fixed Search Area - Modern Kahoot style */
+.search-area-fixed {
+  flex: 0 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+  position: relative;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .search-container {
-  position: relative;
-  margin-bottom: 25px;
   display: flex;
   gap: 12px;
   align-items: stretch;
 }
 
-.search-input {
+/* Scrollable Content Area - Matching gradient */
+.scrollable-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+  border-radius: 0 0 24px 24px; /* Rounded bottom corners */
+  
+  /* Fix centering issue - ensure content stays at top */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Search Input Wrapper */
+.search-input-wrapper {
+  position: relative;
   flex: 1;
-  padding: 16px 20px;
-  border: 2px solid rgba(70, 23, 143, 0.1);
-  border-radius: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  /* border-radius handled by universal rule */
   font-size: 1rem;
   font-family: inherit;
-  background: #F8F9FF;
+  font-weight: 500;
+  background: white;
+  color: var(--dark-gray);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  
+  /* Mobile keyboard optimizations */
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  
+  /* Smooth Kahoot-style transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.search-input:focus {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2), 0 0 0 3px var(--accent-orange);
+  transform: translateY(-2px);
+}
+
+.search-input::placeholder {
+  color: rgba(70, 23, 143, 0.6);
+  font-weight: 400;
+}
+
+
 
 .filter-controls {
   display: flex;
@@ -235,17 +351,27 @@
 }
 
 .filter-select {
-  padding: 16px 18px;
-  border: 2px solid rgba(70, 23, 143, 0.1);
-  border-radius: 16px;
-  font-size: 1rem;
+  padding: 16px 20px;
+  border: none;
+  /* border-radius handled by universal rule */
+  font-size: 0.95rem;
   font-family: inherit;
-  background: #F8F9FF;
-  color: var(--primary-purple);
   font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+  color: white;
   cursor: pointer;
-  min-width: 120px;
-  white-space: nowrap;
+  min-width: 140px;
+  box-shadow: 0 4px 20px rgba(247, 148, 30, 0.3);
+  
+  /* Smooth Kahoot-style transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-select:focus,
+.filter-select:hover {
+  box-shadow: 0 6px 30px rgba(247, 148, 30, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .filter-select:focus {
@@ -290,7 +416,26 @@
 .questions-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px; /* Reduced gap for mobile efficiency */
+  
+  /* Ensure questions start from top - no centering */
+  padding: 0;
+  margin: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  
+  /* Enable smooth animations for children */
+  perspective: 1000px;
+  
+  /* Take full width */
+  width: 100%;
+}
+
+/* Desktop: Restore larger gaps */
+@media (min-width: 769px) {
+  .questions-list {
+    gap: 16px; /* Comfortable spacing on desktop */
+  }
 }
 
 .question-card {
@@ -298,10 +443,21 @@
   border: 2px solid rgba(70, 23, 143, 0.08);
   border-radius: 16px;
   padding: 20px;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  margin-bottom: 16px;
+  
+  /* Smooth animations - prevent jumping */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
+
+/* Filtered out state - completely hidden */
+.question-card.filtered-out {
+  display: none; /* Completely remove from layout */
+}
+
+/* Smooth transitions for search results */
 
 .question-card::before {
   content: '';
@@ -460,6 +616,28 @@
     font-weight: 700;
   }
 
+  /* Mobile: Full-width design for maximum reading space */
+  .main-menu {
+    margin: 0;
+    height: 100vh;
+    border-radius: 0; /* No rounded corners on tablet */
+    box-shadow: none;
+    max-width: none; /* Use full width */
+  }
+
+  .browser-header-fixed {
+    padding: 12px 15px;
+    /* Remove border-radius override here */
+  }
+  
+  .browser-title {
+    font-size: 1.3rem;
+  }
+  
+  .search-area-fixed {
+    padding: 10px 8px; /* Reduced padding for more space */
+  }
+
   .search-container {
     flex-direction: column;
     gap: 12px;
@@ -467,22 +645,78 @@
 
   .search-input {
     font-size: 1rem;
-    padding: 14px 18px;
-    border-radius: 14px;
+    padding: 14px 18px; /* Slightly reduced padding */
+    /* border-radius handled by universal rule */
   }
 
   .filter-select {
-    font-size: 1rem;
-    padding: 14px 16px;
-    border-radius: 14px;
-    min-width: 100px;
+    font-size: 0.9rem;
+    padding: 14px 16px; /* Slightly reduced padding */
+    /* border-radius handled by universal rule */
+    min-width: auto;
+    text-align: center;
   }
-
+  
+  .scrollable-content {
+    padding: 8px; /* Minimal padding for maximum content space */
+    border-radius: 0;
+  }
+  
+  /* Tablet question cards optimization */
+  .question-card {
+    padding: 16px; /* Slightly more than mobile but less than desktop */
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
 }
 
+
+
 @media (max-width: 480px) {
+  /* Small Mobile: Maximum space utilization */
   .main-menu {
-    padding: 90px 18px 30px 18px;
+    margin: 0;
+    height: 100vh;
+    border-radius: 0; /* Full screen */
+    box-shadow: none;
+    max-width: none;
+  }
+
+  .browser-header-fixed {
+    padding: 8px 5px;
+    /* Remove border-radius override here */
+  }
+  
+  .browser-title {
+    font-size: 1.2rem; /* Smaller title for more space */
+  }
+  
+  .search-area-fixed {
+    padding: 8px 5px; /* Ultra minimal padding */
+  }
+  
+  .search-input {
+    padding: 12px 16px; /* Optimized for touch but space-efficient */
+    /* border-radius handled by universal rule */
+    font-size: 0.95rem;
+  }
+  
+  .filter-select {
+    padding: 12px 14px; /* Compact but touchable */
+    /* border-radius handled by universal rule */
+    font-size: 0.8rem;
+  }
+  
+  .scrollable-content {
+    padding: 5px; /* Absolute minimal padding */
+    border-radius: 0;
+  }
+  
+  /* Optimize question cards for mobile reading */
+  .question-card {
+    padding: 12px; /* Minimal padding but still readable */
+    margin: 0 0 8px 0; /* Tight margins, no side margins */
+    border-radius: 8px; /* Smaller radius for space efficiency */
   }
 
   .welcome-section {
@@ -519,3 +753,46 @@
 
 
 } 
+
+/* OLD DEBUG RULES REMOVED - Using final override at end of file */
+
+/* --- FINAL OVERRIDE: Perfect pill shape for search and filter on ALL devices --- */
+/* This rule MUST be last to override everything else! */
+.search-input, 
+.filter-select {
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  overflow: visible !important;
+  min-height: 48px !important; /* Ensure height is sufficient for pill shape */
+}
+
+/* Mobile: Proper pill shape with adequate height */
+@media (max-width: 480px) {
+  .search-input, .filter-select {
+    border-radius: 24px 24px 0 0 !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    font-size: 1rem !important;
+    padding: 0 16px !important;
+  }
+}
+
+/* Tablet: Proper pill shape */
+@media (min-width: 481px) and (max-width: 768px) {
+  .search-input, .filter-select {
+    border-radius: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+  }
+}
+
+/* Desktop: Proper pill shape */
+@media (min-width: 769px) {
+  .search-input, .filter-select {
+    border-radius: 50px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+}

@@ -6,8 +6,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ..:/app
-      - /app/node_modules
+      - ../..:/workspace
+      - /workspace/frontend/node_modules
+    working_dir: /workspace/frontend
     environment:
       - NODE_ENV=development
       - REACT_APP_ENV=development

@@ -104,8 +104,8 @@ class HebrewQuizProcessor:
     def extract_matching_questions(self, section: str) -> List[Dict]:
         """Extract matching questions and convert to binary choice questions."""
         try:
-            # Extract main question text
-            question_match = re.search(r'תוכן השאלה\s*(.+?)(?=\n\n|תשובה|\n[א-ז])', section, re.DOTALL)
+            # Extract main question text - only capture the first line after "תוכן השאלה"
+            question_match = re.search(r'תוכן השאלה\s*(.+?)(?=\n)', section, re.DOTALL)
             if not question_match:
                 return []
             
@@ -119,12 +119,22 @@ class HebrewQuizProcessor:
             
             # Extract correct answers from feedback - IMPROVED PARSING
             correct_mappings = {}
-            feedback_match = re.search(r'התשובה הנכונה היא:\s*(.*?)(?=\nשאלה|\n\n|סיום שלב|$)', section, re.DOTALL)
+            feedback_match = re.search(r'התשובה הנכונה היא:\s*(.*?)(?=סיום שלב|$)', section, re.DOTALL)
             if feedback_match:
                 feedback_text = feedback_match.group(1)
                 # Parse mappings like "item → answer" or "item → answer,"
-                mapping_pattern = r'(.+?)\s*→\s*(.+?)(?=,\s*\n|\n|$)'
-                mappings = re.findall(mapping_pattern, feedback_text, re.DOTALL)
+                # Split by commas first, then parse each mapping
+                # Handle the format: "item → answer,\n\nitem → answer,\n\n..."
+                lines = feedback_text.strip().split(',')
+                mappings = []
+                for line in lines:
+                    line = line.strip()
+                    if '→' in line:
+                        parts = line.split('→', 1)
+                        if len(parts) == 2:
+                            item = parts[0].strip()
+                            answer = parts[1].strip()
+                            mappings.append((item, answer))
                 
                 for item, answer in mappings:
                     clean_item = self.clean_text(item)

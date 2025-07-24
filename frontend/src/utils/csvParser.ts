@@ -125,23 +125,37 @@ const parseCSVLine = (line: string): string[] => {
 // Function to load quiz data from the original data directory via symbolic link
 export const loadQuizData = async (): Promise<QuizQuestion[]> => {
   try {
-    console.log('🔄 Starting to load quiz data from original source...');
-    // Access via symbolic link to avoid duplication
-    const response = await fetch('./quiz_data.csv');
-    console.log('📡 Fetch response status:', response.status);
+    console.log('🔄 Loading quiz data from embedded module...');
     
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    // Import the auto-generated quiz data module
+    const { quizDataCSV } = await import('../data/quizData');
+    console.log('📄 CSV text loaded from module, length:', quizDataCSV.length);
     
-    const csvText = await response.text();
-    console.log('📄 CSV text loaded, length:', csvText.length);
-    
-    const questions = parseCSVToQuizQuestions(csvText);
+    const questions = parseCSVToQuizQuestions(quizDataCSV);
     console.log('✅ Final parsed questions count:', questions.length);
     return questions;
   } catch (error) {
-    console.error('❌ Failed to load quiz data:', error);
-    return [];
+    console.error('❌ Failed to load quiz data from module:', error);
+    console.log('🔄 Falling back to fetch method...');
+    
+    try {
+      // Fallback to fetch method
+      const response = await fetch('./quiz_data.csv');
+      console.log('📡 Fetch response status:', response.status);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const csvText = await response.text();
+      console.log('📄 CSV text loaded via fetch, length:', csvText.length);
+      
+      const questions = parseCSVToQuizQuestions(csvText);
+      console.log('✅ Final parsed questions count:', questions.length);
+      return questions;
+    } catch (fetchError) {
+      console.error('❌ Fetch fallback also failed:', fetchError);
+      return [];
+    }
   }
 }; 
