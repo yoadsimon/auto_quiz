@@ -2,6 +2,7 @@
   "name": "hebrew-quiz-pwa",
   "version": "1.0.0",
   "description": "A Progressive Web App for Hebrew quiz questions with offline support",
+  "homepage": "https://yoadsimon.github.io/auto_quiz/",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
