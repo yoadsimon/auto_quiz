@@ -72,20 +72,21 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
       {showResult && (
         <div className="result-section">
           <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
-            {isCorrect ? '🎉' : '❌'}
+            <div className="result-emoji">{isCorrect ? '🎉' : '😔'}</div>
+            <div className="result-text">{isCorrect ? 'נכון!' : 'לא נכון'}</div>
           </div>
           {isCorrect ? (
-            <button className="next-button" onClick={onNextQuestion}>
-              {currentQuestionIndex + 1 < totalQuestions ? '➡️' : '📊'}
-            </button>
+                          <button className="next-button" onClick={onNextQuestion}>
+                {currentQuestionIndex + 1 < totalQuestions ? 'הבא' : 'תוצאות'}
+              </button>
           ) : (
             <div className="button-group">
-              <button className="retry-button" onClick={onRetry}>
-                🔄
-              </button>
-              <button className="next-button" onClick={onNextQuestion}>
-                {currentQuestionIndex + 1 < totalQuestions ? '➡️' : '📊'}
-              </button>
+                              <button className="retry-button" onClick={onRetry}>
+                  נסה שוב
+                </button>
+                <button className="next-button" onClick={onNextQuestion}>
+                  {currentQuestionIndex + 1 < totalQuestions ? 'הבא' : 'תוצאות'}
+                </button>
             </div>
           )}
         </div>
