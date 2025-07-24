@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug localStorage</title>
+</head>
+<body>
+    <h1>Debug Quiz Data</h1>
+    <button onclick="showLocalStorage()">Show localStorage</button>
+    <button onclick="clearLocalStorage()">Clear localStorage</button>
+    <button onclick="testCSV()">Test CSV Loading</button>
+    
+    <div id="output"></div>
+    
+    <script>
+        function showLocalStorage() {
+            const data = localStorage.getItem('hebrew_quiz_data');
+            if (data) {
+                const parsed = JSON.parse(data);
+                document.getElementById('output').innerHTML = 
+                    '<h2>LocalStorage Data:</h2>' +
+                    '<p>Questions count: ' + parsed.length + '</p>' +
+                    '<p>First question: ' + JSON.stringify(parsed[0], null, 2) + '</p>';
+            } else {
+                document.getElementById('output').innerHTML = '<p>No localStorage data found</p>';
+            }
+        }
+        
+        function clearLocalStorage() {
+            localStorage.clear();
+            document.getElementById('output').innerHTML = '<p>localStorage cleared!</p>';
+        }
+        
+        async function testCSV() {
+            try {
+                const response = await fetch('/quiz_data.csv');
+                const text = await response.text();
+                const lines = text.split('\n');
+                document.getElementById('output').innerHTML = 
+                    '<h2>CSV Data:</h2>' +
+                    '<p>Lines count: ' + lines.length + '</p>' +
+                    '<p>Header: ' + lines[0] + '</p>' +
+                    '<p>First data line: ' + lines[1] + '</p>';
+            } catch (error) {
+                document.getElementById('output').innerHTML = '<p>Error loading CSV: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html> 
