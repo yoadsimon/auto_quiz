@@ -175,13 +175,34 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    padding: 20px;
-    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+    backdrop-filter: blur(15px);
+    padding: 25px 20px 30px 20px;
+    box-shadow: 
+      0 -12px 40px rgba(70, 23, 143, 0.15),
+      0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid rgba(70, 23, 143, 0.1);
+    border-radius: 24px 24px 0 0;
     z-index: 1000;
     margin-top: 0;
+    /* Smooth slide-up animation with delay */
+    transform: translateY(100%);
+    opacity: 0;
+    animation: slideUpResult 0.7s ease-out 0.3s forwards;
+    /* Ensure safe area spacing on mobile */
+    padding-bottom: max(30px, env(safe-area-inset-bottom, 20px));
+  }
+  
+  /* Slide-up animation */
+  @keyframes slideUpResult {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 }
 
@@ -340,30 +361,48 @@
   }
 
   .result-message {
-    font-size: 32px;
-    padding: 25px;
-    margin-bottom: 30px;
-    border-radius: 20px;
-    font-weight: 800;
+    font-size: 28px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    font-weight: 700;
+    /* Enhanced mobile styling */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+  }
+  
+  .result-message.correct {
+    border-color: var(--accent-green);
+    background: linear-gradient(135deg, rgba(38, 137, 12, 0.1), rgba(255, 255, 255, 0.9));
+  }
+  
+  .result-message.incorrect {
+    border-color: var(--accent-red);
+    background: linear-gradient(135deg, rgba(226, 27, 60, 0.1), rgba(255, 255, 255, 0.9));
   }
 
   .next-button {
-    padding: 18px 40px;
-    font-size: 20px;
-    border-radius: 25px;
+    padding: 16px 35px;
+    font-size: 18px;
+    border-radius: 20px;
     font-weight: 700;
+    min-width: 140px;
+    box-shadow: 0 6px 20px rgba(70, 23, 143, 0.3);
   }
 
   .button-group {
-    gap: 12px;
-    flex-direction: column;
+    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .retry-button {
-    padding: 18px 40px;
-    font-size: 20px;
-    border-radius: 25px;
+    padding: 16px 35px;
+    font-size: 18px;
+    border-radius: 20px;
     font-weight: 700;
+    min-width: 140px;
+    box-shadow: 0 6px 20px rgba(216, 158, 0, 0.3);
   }
 }
 
