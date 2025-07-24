@@ -81,6 +81,10 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  width: calc(100vw - 20px);
+  max-width: calc(100vw - 20px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .control-panel-left {
@@ -88,6 +92,10 @@ body {
   align-items: center;
   gap: 8px;
   height: 48px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  justify-content: flex-start;
 }
 
 .control-panel-right {
@@ -95,6 +103,10 @@ body {
   align-items: center;
   gap: 8px;
   height: 48px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  justify-content: flex-end;
 }
 
 .control-button {
@@ -510,25 +522,34 @@ button:active {
     top: max(env(safe-area-inset-top), 15px);
     left: max(env(safe-area-inset-left), 15px);
     right: max(env(safe-area-inset-right), 15px);
-    gap: 8px;
+    gap: 6px;
     flex-wrap: nowrap;
     width: calc(100vw - 30px);
     max-width: calc(100vw - 30px);
     box-sizing: border-box;
+    overflow: hidden;
   }
   
   .control-panel-left {
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 6px;
+    flex-wrap: nowrap;
     align-items: center;
     height: 44px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: flex-start;
   }
   
   .control-panel-right {
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 6px;
+    flex-wrap: nowrap;
     align-items: center;
     height: 44px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: flex-end;
   }
 
   .control-button {
@@ -571,25 +592,34 @@ button:active {
     top: max(env(safe-area-inset-top), 12px);
     left: max(env(safe-area-inset-left), 12px);
     right: max(env(safe-area-inset-right), 12px);
-    gap: 6px;
+    gap: 4px;
     flex-wrap: nowrap;
     width: calc(100vw - 24px);
     max-width: calc(100vw - 24px);
     box-sizing: border-box;
+    overflow: hidden;
   }
   
   .control-panel-left {
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 4px;
+    flex-wrap: nowrap;
     align-items: center;
     height: 40px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: flex-start;
   }
   
   .control-panel-right {
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 4px;
+    flex-wrap: nowrap;
     align-items: center;
     height: 40px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: flex-end;
   }
 
   .control-button {
