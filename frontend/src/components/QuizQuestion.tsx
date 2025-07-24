@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { QuizQuestion as QuizQuestionType } from '../types/quiz';
 import './QuizQuestion.css';
 
@@ -27,6 +27,22 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
 }) => {
   const answerColors = ['#e21b3c', '#1368ce', '#d89e00', '#26890c']; // Kahoot colors
   const answerLabels = ['A', 'B', 'C', 'D'];
+  const resultSectionRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to result when it appears
+  useEffect(() => {
+    if (showResult && resultSectionRef.current) {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        setTimeout(() => {
+          resultSectionRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }, 300); // Small delay to let result render
+      }
+    }
+  }, [showResult]);
 
   return (
     <div className="quiz-question">
@@ -70,7 +86,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({
 
       {/* Result Display */}
       {showResult && (
-        <div className="result-section">
+        <div className="result-section" ref={resultSectionRef}>
           <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
             {isCorrect ? '🎉' : '❌'}
           </div>

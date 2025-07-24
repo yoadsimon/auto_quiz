@@ -283,8 +283,8 @@
   }
 
   .question-card {
-    padding: 35px 30px;
-    margin-bottom: 35px;
+    padding: 25px 20px;
+    margin-bottom: 25px;
     border-radius: 24px;
   }
 
@@ -295,8 +295,8 @@
   }
 
   .answers-grid {
-    gap: 18px;
-    margin-bottom: 40px;
+    gap: 15px;
+    margin-bottom: 25px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -367,8 +367,8 @@
   }
 
   .question-card {
-    padding: 30px 25px;
-    margin-bottom: 30px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
     border-radius: 20px;
   }
 
@@ -380,8 +380,8 @@
 
   .answers-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 35px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
 
   .answer-button {
