@@ -325,6 +325,8 @@
     padding: 60px 20px 30px 20px;
     align-items: flex-start;
     justify-content: flex-start;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .results-container {
@@ -407,6 +409,8 @@
 @media (max-width: 480px) {
   .quiz-results {
     padding: 90px 18px 30px 18px;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .results-container {

@@ -263,6 +263,8 @@
     min-height: 100vh;
     max-width: none;
     width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .progress-container {
@@ -295,6 +297,8 @@
   .answers-grid {
     gap: 18px;
     margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .answer-button {
@@ -349,6 +353,8 @@
 @media (max-width: 480px) {
   .quiz-question {
     padding: 80px 18px 30px 18px;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .progress-text {
@@ -384,6 +390,10 @@
     font-size: 17px;
     border-radius: 14px;
     font-weight: 600;
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .answer-label {
